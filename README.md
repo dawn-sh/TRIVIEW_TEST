@@ -93,18 +93,23 @@
 https://github.com/dawn-sh/sist_FinalProject/assets/111737185/8aedb607-1d80-4e21-81ca-8cb30783b46c
 
 결제 구현 영상
+
 https://github.com/dawn-sh/sist_FinalProject/assets/111737185/18e0c2cb-10db-48c3-a6f5-5aec547935f7
 
 예약완료페이지 이스터에그/마이페이지 예약내역 이동
+
 https://github.com/dawn-sh/sist_FinalProject/assets/111737185/5c5df6ed-c0cc-4f4c-a230-0cd95b468b4d
 
 관리자 사업자 승인
+
 https://github.com/dawn-sh/sist_FinalProject/assets/111737185/51a4b714-2ab3-47d8-9eac-dd5beee72ee4
 
 관리자 숙소 승인 거부
+
 https://github.com/dawn-sh/sist_FinalProject/assets/111737185/a9d9eb22-f908-4bc0-85f9-2cfa74539fcf
 
 관리자 숙소 승인시 방등록 가능
+
 https://github.com/dawn-sh/sist_FinalProject/assets/111737185/7132334b-e451-4b41-9da4-f1f725d7d178
 
 </div>
