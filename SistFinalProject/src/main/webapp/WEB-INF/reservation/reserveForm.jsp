@@ -367,7 +367,7 @@
 						<div class="modal-footer">
 							<button type="button" id="pay-confirm-btn">확인 및 결제진행</button>
 							
-							<!-- 카카오페이 api -->
+							<!-- 결제 api -->
 							<script>
 								IMP.init("imp06867735");
 								
@@ -411,7 +411,9 @@
 								        console.log(rsp);
 
 								        if (rsp.success) {
-								            sendPaymentData(reservationNumber, amount, room_num, room_checkin, room_checkout, reserve_name, reserve_hp, coupon_name, accom_name, room_name, accom_num);
+								            sendPaymentData(reservationNumber, amount, room_num, room_checkin,
+								            		       room_checkout, reserve_name, reserve_hp, coupon_name,
+								            		       accom_name, room_name, accom_num);
 								        } else {
 								            alert("결제를 취소했습니다");
 								        }
@@ -421,21 +423,23 @@
 								// 선택한 결제 방식에 따라 pay_method 결정하는 함수
 								function getPayMethod(paymentMethod) {
 								    switch (paymentMethod) {
-								        case "kakaopay":
-								            return "card"; // 필요에 따라 TossPay의 경우 해당하는 pay_method으로 업데이트
-								        case "tosspay":
-								            return "card"; // TossPay의 경우 해당하는 pay_method으로 업데이트
-								        case "html5_inicis":
+								        case "kakaopay": //카카오페이
 								            return "card";
-								        case "payco":
-								            return "card"; // Payco의 경우 해당하는 pay_method으로 업데이트
+								        case "tosspay": //토스페이
+								            return "card";
+								        case "html5_inicis": //KG이니시스
+								            return "card";
+								        case "payco": //페이코
+								            return "card";
 								        default:
-								            return "card"; // 선택한 방식이 인식되지 않는 경우 기본적으로 카드 결제로 설정
+								            return "card";
 								    }
 								}
 								
-								function sendPaymentData(reservationNumber, amount, room_num, room_checkin, room_checkout, reserve_name, reserve_hp, coupon_name, accom_name, room_name, accom_num) {
-								    // 여기에 더 많은 데이터를 추가할 수 있습니다.
+								function sendPaymentData(reservationNumber, amount, room_num, room_checkin,
+										                 room_checkout, reserve_name, reserve_hp, coupon_name,
+										                 accom_name, room_name, accom_num) {
+								    // 더 많은 데이터를 추가
 								    
 								    var additionalData = {
 								        reservationNumber: reservationNumber,
@@ -457,7 +461,7 @@
 								        url: "/reserve/insert",
 								        data: additionalData,
 								        success: function (response) {
-								            // 서버에서 Success 응답을 받으면 추가적인 로직을 수행할 수 있습니다.
+								            // 서버에서 Success 응답을 받으면 추가적인 로직을 수행
 								            window.location.href = "/payment/pay-success";
 								        },
 								        error: function (error) {
