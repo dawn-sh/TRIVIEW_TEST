@@ -4,7 +4,37 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="sist.last.mapper.ReserveMapperInter">
  	<insert id="reservingInsert" parameterType="reserveDto">
- 		insert into reservation values (null,#{reserve_id},#{info_id},#{reserve_name},#{reserve_hp},#{room_num},#{accom_num},#{accom_name},#{room_name},#{reserve_amount},#{reserve_checkin},#{reserve_checkout},"예약완료",#{reserve_coupon},now());
+		INSERT INTO reservation (
+		reserve_id,
+		info_id,
+		reserve_name,
+		reserve_hp,
+		room_num,
+		accom_num,
+		accom_name,
+		room_name,
+		reserve_amount,
+		reserve_checkin,
+		reserve_checkout,
+		reserve_status,
+		reserve_coupon,
+		reserve_day
+		) VALUES (
+		#{reserve_id},
+		#{info_id},
+		#{reserve_name},
+		#{reserve_hp},
+		#{room_num},
+		#{accom_num},
+		#{accom_name},
+		#{room_name},
+		#{reserve_amount},
+		#{reserve_checkin},
+		#{reserve_checkout},
+		'예약완료',
+		#{reserve_coupon},
+		NOW()
+		)
  	</insert>
  	
  	<select id="getOneDataByIdOfReserve" parameterType="Map" resultType="reserveDto">
@@ -35,4 +65,13 @@
     	select room_photo from room where room_num = #{room_num}
     </select>
 
- </mapper>
+	<select id="getRoomWithLock" parameterType="map" resultType="reserveDto">
+		SELECT * FROM reservation
+		WHERE room_num = #{room_num}
+		AND reserve_checkin < #{reserve_checkout}
+		AND reserve_checkout > #{reserve_checkin}
+		FOR UPDATE
+	</select>
+
+
+</mapper>

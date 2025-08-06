@@ -18,5 +18,9 @@ public interface ReserveMapperInter {
 	public List<ReserveDto> getReservationDataById(String info_id);
 	public void updateReserveStatus(ReserveDto dto);
 	public String getPhoto(String room_num);
-	
+
+	// 비관적 락 메서드 추가
+	public List<ReserveDto> getRoomWithLock(Map<String, Object> map);
+
+
 }

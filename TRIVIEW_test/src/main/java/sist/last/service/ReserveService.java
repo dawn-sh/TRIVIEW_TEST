@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import sist.last.dto.ReserveDto;
 import sist.last.mapper.ReserveMapperInter;
 
@@ -15,10 +16,22 @@ public class ReserveService implements ReserveServiceInter {
 
 	@Autowired
 	ReserveMapperInter mapper;
-	
+
+	// 트랜잭션 및 비관적 락 정용 예약 메서드 + @Transactional 추가
 	@Override
+	@Transactional
 	public void reservingInsert(ReserveDto dto) {
-		// TODO Auto-generated method stub
+		Map<String, Object> param = new HashMap<>();
+		param.put("room_num", dto.getRoom_num());
+		param.put("reserve_checkin", dto.getReserve_checkin());
+		param.put("reserve_checkout", dto.getReserve_checkout());
+
+		List<ReserveDto> locked = mapper.getRoomWithLock(param);
+
+		if (!locked.isEmpty()) {
+			throw new RuntimeException("이미 예약된 날짜입니다.");
+		}
+
 		mapper.reservingInsert(dto);
 	}
 
